@@ -1,0 +1,5 @@
+[flake8]
+exclude =
+    news/tests.py,
+    news/admin.py,
+    news/migrations/*.py
