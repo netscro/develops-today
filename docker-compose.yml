@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres_news_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  rabbit:
+    restart: always
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_NODENAME: "rabbit@localhost"
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  web:
+    build: .
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - rabbit
+  celery:
+    build:
+      context: .
+    command: celery -A app worker -l info
+    depends_on:
+      - db
+      - rabbit
+
+
+
+
