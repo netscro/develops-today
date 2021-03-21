@@ -5,11 +5,10 @@ from news.models import Posts, Comments
 
 class PostsSerializer(serializers.ModelSerializer):
 
-    author = serializers.SlugRelatedField(slug_field="username", read_only=True)
-
     class Meta:
         model = Posts
         fields = [
+            'id',
             'title',
             'creation_date',
             'author',
@@ -19,8 +18,6 @@ class PostsSerializer(serializers.ModelSerializer):
 
 
 class CommentsSerializer(serializers.ModelSerializer):
-
-    author = serializers.SlugRelatedField(slug_field="username", read_only=True)
 
     class Meta:
         model = Comments

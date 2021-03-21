@@ -17,19 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from news.views import PostsViewAPI, CommentsViewAPI
+from news.views import PostsViewAPI, CommentsViewAPI, PostVotesUp
 
 # urls of drf
 router = routers.DefaultRouter()
-router.register(r'posts/api_view', PostsViewAPI,
-                basename='posts_api')
-router.register(r'comments/api_view', CommentsViewAPI,
-                basename='comments_api')
+router.register(r'posts/api_view', PostsViewAPI,)
+router.register(r'comments/api_view', CommentsViewAPI,)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # drf main page
     path('', include(router.urls)),
+    # url of u
+    path('posts/api_view/<pk>/up/', PostVotesUp.as_view()),
 
 ]
