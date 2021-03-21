@@ -1,12 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
-
+from django.shortcuts import get_object_or_404
 # Create your views here.
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from news.models import Posts, Comments
-from news.serializers import PostsSerializer, CommentsSerializer
+from news.models import Comments, Posts
+from news.serializers import CommentsSerializer, PostsSerializer
 
 
 class PostsViewAPI(ModelViewSet):
