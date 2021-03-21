@@ -19,7 +19,6 @@ class CommentsViewAPI(ModelViewSet):
 
 
 class PostVotesUp(APIView):
-
     def post(self, request, pk):
         post = get_object_or_404(Posts, id=pk)
         post.vote_count += 1

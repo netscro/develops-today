@@ -21,15 +21,19 @@ from news.views import CommentsViewAPI, PostsViewAPI, PostVotesUp
 
 # urls of drf
 router = routers.DefaultRouter()
-router.register(r'posts/api_view', PostsViewAPI,)
-router.register(r'comments/api_view', CommentsViewAPI,)
+router.register(
+    r"posts/api_view",
+    PostsViewAPI,
+)
+router.register(
+    r"comments/api_view",
+    CommentsViewAPI,
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
+    path("admin/", admin.site.urls),
     # drf main page
-    path('', include(router.urls)),
+    path("", include(router.urls)),
     # url of u
-    path('posts/api_view/<pk>/up/', PostVotesUp.as_view()),
-
+    path("posts/api_view/<pk>/up/", PostVotesUp.as_view()),
 ]
