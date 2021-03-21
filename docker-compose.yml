@@ -35,6 +35,13 @@ services:
     depends_on:
       - db
       - rabbit
+  celery-beat:
+    build:
+      context: .
+    command: celery -A app beat -l info
+    depends_on:
+      - db
+      - rabbit
 
 
 
